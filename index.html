@@ -21,14 +21,17 @@
      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
      <script
       src="https://kit.fontawesome.com/3902d11f74.js"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous">
+    </script>
   </head>
+
   <body>
-    <video playsinline autoplay muted loop>
+   
+
+       <video playsinline autoplay muted loop>
       <source src="images/Cloud timelapse.mp4" type="video/mp4" />
     </video>
-    <div class="container overlay">
+        <div class="container overlay">
         <div class="row">  
                   <div class="col-11 p-0">
           <form id="search">
@@ -62,7 +65,7 @@
              <div class="today col"> <span id="today-icon" class="col align-self-center"> <i class="fa-solid fa-sun"> </i> </span><span class="col">Today <strong id = "today-temp">25˚C </strong> </span></br> <span class=col>26˚C / 17˚C</div>
             </div>
           </div>
-            <div class="row">                
+            <div class="forecast row">                
             </br>
                 <div class="tomorrow col"> <i class="fa-solid fa-cloud-sun"></i> </br><span id="Day-1">Tomorrow </span></br><strong>24˚C </strong> / 17˚C</div>
             </br>
@@ -79,11 +82,14 @@
                   <div class="col celsius">
                     <a href="#">˚F</a> / <a href="#">˚C</a>
                   </div>
+                  
                 </div>
-            </div>
-            </div>
-    </div>
-    <script src="src/app.js">
+               
+            
+            <p class="openCode"><small><a href="https://github.com/taniabbott/vanilla-weather-app.git">Open-source code</a> by Tani Abbott  </small></p>
+</div>
+             
+                <script src="src/app.js">
     </script>
   </body>
 </html>

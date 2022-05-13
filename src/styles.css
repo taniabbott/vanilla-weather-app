@@ -91,3 +91,11 @@ button {
   background-color: transparent;
   border-radius: 2px;
 }
+
+wrapper {
+  position: absolute;
+  margin-left: 300px;
+  padding-left: 0px;
+  max-width: 800px;
+  bottom: -25px;
+}
