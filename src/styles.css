@@ -1,0 +1,93 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 100;
+}
+video {
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: opacity (0.01%);
+}
+.overlay {
+  position: relative;
+  border: 1px grey;
+  border-radius: 4px;
+  top: 60px;
+  margin: auto;
+  width: 75%;
+  height: 75%;
+  padding: 60px 60px;
+  font-size: 20px;
+  font-family: Helvetica;
+  color: grey;
+  background-color: rgba(255, 255, 255, 0.6);
+  display: block;
+  max-width: 800px;
+}
+form {
+  box-sizing: border-box;
+  font-size: 45px;
+  border: 0px;
+  padding: 0px 0px 25px;
+  padding-left: 0px;
+}
+input[type="text"] {
+  background-color: rgba(255, 255, 255, 0);
+  border: 0.1px;
+}
+input[type="text"]:focus {
+  border: 0.1px;
+  outline: none;
+}
+button {
+  margin: 8px;
+}
+.temp {
+  margin-top: 50px;
+}
+.details {
+  font-size: x-small;
+  text-align: right;
+  display: block;
+}
+
+.btn-xs {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  text-align: right;
+  border: 1px solid;
+}
+.today {
+  text-align: right;
+  font-size: 35px;
+  padding-bottom: 50px;
+}
+#today-icon {
+  font-size: 50px;
+  margin-top: 3px;
+  vertical-align: middle;
+}
+.weatherDetails {
+  padding: 20px 0px 40px;
+}
+.celsius {
+  padding: 2px;
+  font-size: medium;
+  margin-top: 20px;
+  text-align: right;
+}
+.tomorrow {
+  margin-left: 1px;
+  text-align: center;
+  font-size: smaller;
+}
+#current-location {
+  border-color: grey;
+  border-width: 1px;
+  background-color: transparent;
+  border-radius: 2px;
+}

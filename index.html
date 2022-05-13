@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather app 🌧</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Square+Peg&display=swap"
+      rel="stylesheet"
+    />
+     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+     <script
+      src="https://kit.fontawesome.com/3902d11f74.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <video playsinline autoplay muted loop>
+      <source src="images/Cloud timelapse.mp4" type="video/mp4" />
+    </video>
+    <div class="container overlay">
+        <div class="row">  
+                  <div class="col-11 p-0">
+          <form id="search">
+                <input type="text" type="submit" id="city" placeholder="Barcelona" autofocus="on"/>
+              </form>
+      </div>
+          <div class="col-1">
+          <button id ="current-location">
+                  <i class="fa-solid fa-location-dot"></i>
+                </button>
+            <div class="row details">
+              <span id="date">21st April 2022</span>
+            </br>
+            <span id="time">9:39PM</span>
+            </div>
+            </div>
+                </div>
+        <div class="row ">
+            <div class="col-4 weatherDetails">
+                    <div class="weatherDescription">
+                        cloudy skies
+                    </div>
+                     <div class="wind">
+                         Wind: 20km/h
+                     </div>
+                    <div class="humidity">
+                        Humidity: 70%
+                    </div>
+            </div>
+            <div class="row">
+             <div class="today col"> <span id="today-icon" class="col align-self-center"> <i class="fa-solid fa-sun"> </i> </span><span class="col">Today <strong id = "today-temp">25˚C </strong> </span></br> <span class=col>26˚C / 17˚C</div>
+            </div>
+          </div>
+            <div class="row">                
+            </br>
+                <div class="tomorrow col"> <i class="fa-solid fa-cloud-sun"></i> </br><span id="Day-1">Tomorrow </span></br><strong>24˚C </strong> / 17˚C</div>
+            </br>
+                <div class="tomorrow col"><i class="fa-solid fa-cloud"></i></br><span id="Day-2"> Day after </span> </br><strong>28˚C </strong> / 20˚C</div>
+            </br>
+                <div class="tomorrow col"><i class="fa-solid fa-cloud"></i> </br><span id="Day-3"> Day after </span></br> <strong>29˚C </strong> / 18˚C</div>
+            </br>
+          <div class="tomorrow col"><i class="fa-solid fa-sun"></i> </br><span id="Day-4"> Day after </span> </br><strong>29˚C </strong> / 17˚C</div>
+           </br>
+          <div class="tomorrow col"><i class="fa-solid fa-cloud-sun"></i> </br><span id="Day-5"> Day after </span></br> <strong>29˚C </strong> / 17˚C</div>
+
+                </div>
+                <div class="row"> 
+                  <div class="col celsius">
+                    <a href="#">˚F</a> / <a href="#">˚C</a>
+                  </div>
+                </div>
+            </div>
+            </div>
+    </div>
+    <script src="src/app.js">
+    </script>
+  </body>
+</html>
