@@ -31,26 +31,29 @@
        <video playsinline autoplay muted loop>
       <source src="images/Cloud timelapse.mp4" type="video/mp4" />
     </video>
+    <div class="wrapper">
         <div class="container overlay">
         <div class="row">  
-                  <div class="col-11 p-0">
+            <div class="col-10 p-0">
           <form id="search">
                 <input type="text" type="submit" id="city" placeholder="Barcelona" autofocus="on"/>
               </form>
       </div>
-          <div class="col-1">
-          <button id ="current-location">
+          <div class="col-1 align-self-center" >
+          <button id ="celsius-button">
+                  ˚F
+          </button>
+                </div>
+                <div class="col-1 align-self-center">
+                <button id ="current-location">
                   <i class="fa-solid fa-location-dot"></i>
                 </button>
-            <div class="row details">
-              <span id="date">21st April 2022</span>
-            </br>
-            <span id="time">9:39PM</span>
-            </div>
-            </div>
                 </div>
-        <div class="row ">
+                </div>
+            <div class="row">
             <div class="col-4 weatherDetails">
+                    <span id="date">21st April 2022</span>
+                    <span id="time">9:39PM</span>
                     <div class="weatherDescription">
                         cloudy skies
                     </div>
@@ -62,7 +65,7 @@
                     </div>
             </div>
             <div class="row">
-             <div class="today col"> <span id="today-icon" class="col align-self-center"> <i class="fa-solid fa-sun"> </i> </span><span class="col">Today <strong id = "today-temp">25˚C </strong> </span></br> <span class=col>26˚C / 17˚C</div>
+             <div class="today col"> <span class="col">Today <strong id = "today-temp">25˚C </strong> </span></br> <span class=col>26˚C / 17˚C</div>
             </div>
           </div>
             <div class="forecast row">                
@@ -77,18 +80,11 @@
            </br>
           <div class="tomorrow col"><i class="fa-solid fa-cloud-sun"></i> </br><span id="Day-5"> Day after </span></br> <strong>29˚C </strong> / 17˚C</div>
 
-                </div>
-                <div class="row"> 
-                  <div class="col celsius">
-                    <a href="#">˚F</a> / <a href="#">˚C</a>
-                  </div>
-                  
-                </div>
-               
+                </div>         
             
-            <p class="openCode"><small><a href="https://github.com/taniabbott/vanilla-weather-app.git">Open-source code</a> by Tani Abbott  </small></p>
 </div>
-             
+             <div class="about"><small><a href="https://github.com/taniabbott/vanilla-weather-app.git">Open-source code</a> by Tani Abbott  </small></div>
+             </div>
                 <script src="src/app.js">
     </script>
   </body>
