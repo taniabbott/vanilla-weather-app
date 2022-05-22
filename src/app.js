@@ -61,10 +61,14 @@ function showTemperature(response) {
   let windSpeed = document.querySelector(".wind");
   windSpeed.innerHTML = `Wind: ${windy}km/h`;
 
+  let currentLocationName = document.querySelector("#city");
+  let responseData = response.data.name;
+  currentLocationName.setAttribute("placeholder", `${responseData}`);
+  document.getElementById("search").reset();
   //Background change
   let backgroundVideo = document.getElementById("video");
   let description = response.data.weather[0];
-  if (description["description"].includes("cloudy")) {
+  if (description["description"].includes("cloud")) {
     backgroundVideo.setAttribute("src", "images/Cloud timelapse.mp4");
   } else if (description["description"].includes("snow")) {
     backgroundVideo.setAttribute("src", "images/Snow falling by the trees.mp4");
@@ -87,28 +91,6 @@ function showTemperature(response) {
     );
   }
 }
-function showTemperatureCurrent(response) {
-  let temperature = Math.round(response.data.main.temp);
-  let temperatureElement = document.querySelector("#today-temp");
-  temperatureElement.innerHTML = `${temperature}˚C`;
-
-  let humid = Math.round(response.data.main.humidity);
-  let humidity = document.querySelector(".humidity");
-  humidity.innerHTML = `Humidity: ${humid}%`;
-
-  let weatherE = response.data.weather[0].description;
-  let eventType = document.querySelector("#description");
-  eventType.innerHTML = `${weatherE}`;
-
-  let windy = Math.round(response.data.wind.speed);
-  let windSpeed = document.querySelector(".wind");
-  windSpeed.innerHTML = `Wind: ${windy}km/h`;
-
-  let currentLocationName = document.querySelector("#city");
-  let responseData = response.data.name;
-  currentLocationName.setAttribute("placeholder", `${responseData}`);
-}
-
 //find current
 function currentPosition(position) {
   let lat = position.coords.latitude;
@@ -116,7 +98,7 @@ function currentPosition(position) {
   let units = "metric";
   let apiKey = "e52c8c1aa4aa55ffa5e0f4d0066c2fed";
   let findLocation = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-  axios.get(findLocation).then(showTemperatureCurrent);
+  axios.get(findLocation).then(showTemperature);
 }
 function getCurrentPosition(event) {
   event.preventDefault;
