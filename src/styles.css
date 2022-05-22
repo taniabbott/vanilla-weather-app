@@ -33,8 +33,8 @@ wrapper {
 }
 .about {
   position: absolute;
-  top: 75%;
-  left: 8.5%;
+  bottom: 5px;
+  left: 10px;
   margin: auto;
 }
 form {

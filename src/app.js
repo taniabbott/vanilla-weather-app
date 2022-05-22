@@ -42,6 +42,7 @@ function handleSubmit(event) {
 let form = document.querySelector("#search");
 form.addEventListener("submit", handleSubmit);
 
+//Show current temp
 function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
   let temperatureElement = document.querySelector("#today-temp");
@@ -60,11 +61,17 @@ function showTemperature(response) {
   let windSpeed = document.querySelector(".wind");
   windSpeed.innerHTML = `Wind: ${windy}km/h`;
 
-  iconElement.setAttribute(
-    "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-  iconElement.setAttribute("alt", response.data.weather[0].description);
+  let backgroundVideo = document.getElementById("video");
+  let description = response.data.weather[0];
+  if (description["description"].includes("cloudy")) {
+    backgroundVideo.setAttribute("src", "images/Cloud timelapse.mp4");
+  } else if (description["description"].includes("snow")) {
+    backgroundVideo.setAttribute("src", "images/Snow falling by the trees.mp4");
+  } else if (description["description"].includes("clear")) {
+    backgroundVideo.setAttribute("src", "images/Sun shining on palm trees.mp4");
+  } else if (description["description"].includes("drizzle")) {
+    backgroundVideo.setAttribute("src", "images/Garage door closing.mp4");
+  }
 }
 function showTemperatureCurrent(response) {
   let temperature = Math.round(response.data.main.temp);
@@ -105,18 +112,9 @@ function getCurrentPosition(event) {
 let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getCurrentPosition);
 
-//Background Change
-let backgroundVideo = document.querySelector("#video");
-let description = document.querySelector(".weatherDescription");
-function checking() {
-  if (description.includes("cloudy")) {
-    backgroundVideo.setAttribute("src", "images/Cloud timelapse.mp4");
-  } else if (description.includes("snow")) {
-    backgroundVideo.setAttribute("src", "images/Snow falling by the trees.mp4");
-  } else if (description.includes("clear")) {
-    backgroundVideo.setAttribute("src", "images/Sun shining on palm trees.mp4");
-  } else if (description.includes("rain")) {
-    backgroundVideo.setAttribute("src", "images/Garage door closing.mp4");
-  }
-}
-form.addEventListener("submit", checking);
+//Forecast
+// iconElement.setAttribute(
+// "src",
+//`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+//);
+//iconElement.setAttribute("alt", response.data.weather[0].description);
