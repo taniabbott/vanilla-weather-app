@@ -54,13 +54,14 @@ function showTemperature(response) {
   humidity.innerHTML = `Humidity: ${humid}%`;
 
   let weatherE = response.data.weather[0].description;
-  let eventType = document.querySelector(".weatherDescription");
+  let eventType = document.querySelector("#description");
   eventType.innerHTML = `${weatherE}`;
 
   let windy = Math.round(response.data.wind.speed);
   let windSpeed = document.querySelector(".wind");
   windSpeed.innerHTML = `Wind: ${windy}km/h`;
 
+  //Background change
   let backgroundVideo = document.getElementById("video");
   let description = response.data.weather[0];
   if (description["description"].includes("cloudy")) {
@@ -70,7 +71,20 @@ function showTemperature(response) {
   } else if (description["description"].includes("clear")) {
     backgroundVideo.setAttribute("src", "images/Sun shining on palm trees.mp4");
   } else if (description["description"].includes("drizzle")) {
-    backgroundVideo.setAttribute("src", "images/Garage door closing.mp4");
+    backgroundVideo.setAttribute(
+      "src",
+      "images/Rain falling on windshield.mp4"
+    );
+  } else if (description["description"].includes("rain")) {
+    backgroundVideo.setAttribute(
+      "src",
+      "images/Rain falling on windshield.mp4"
+    );
+  } else if (description["description"].includes("mist")) {
+    backgroundVideo.setAttribute(
+      "src",
+      "images/Misty mountains in Salta, Argentina.mp4"
+    );
   }
 }
 function showTemperatureCurrent(response) {
@@ -83,7 +97,7 @@ function showTemperatureCurrent(response) {
   humidity.innerHTML = `Humidity: ${humid}%`;
 
   let weatherE = response.data.weather[0].description;
-  let eventType = document.querySelector(".weatherDescription");
+  let eventType = document.querySelector("#description");
   eventType.innerHTML = `${weatherE}`;
 
   let windy = Math.round(response.data.wind.speed);
