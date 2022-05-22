@@ -45,6 +45,7 @@ form.addEventListener("submit", handleSubmit);
 function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
   let temperatureElement = document.querySelector("#today-temp");
+  let iconElement = document.querySelector(".icon");
   temperatureElement.innerHTML = `${temperature}˚C`;
 
   let humid = Math.round(response.data.main.humidity);
@@ -58,6 +59,12 @@ function showTemperature(response) {
   let windy = Math.round(response.data.wind.speed);
   let windSpeed = document.querySelector(".wind");
   windSpeed.innerHTML = `Wind: ${windy}km/h`;
+
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 function showTemperatureCurrent(response) {
   let temperature = Math.round(response.data.main.temp);
@@ -98,18 +105,18 @@ function getCurrentPosition(event) {
 let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getCurrentPosition);
 
-//For later
-//$(document).ready(function() {
-
-//$(".credit-input").on("input",function(){
-// var value = $(this).val();
-
-//if (value == "411")
-//$(".jp-front").css({backgroundImage:"url(http://www.lowestrates.ca/newcontent/img/creditcards/Gold_Rewards_Card_chip_467x293.png)"});
-
-//else if (value == "311")
-//$(".jp-front").css({backgroundImage:"url(https://www.bmo.com/img/main/credit-cards/large/rewards-card.jpg)"});
-
-//})
-
-//})
+//Background Change
+let backgroundVideo = document.querySelector("#video");
+let description = document.querySelector(".weatherDescription");
+function checking() {
+  if (description.includes("cloudy")) {
+    backgroundVideo.setAttribute("src", "images/Cloud timelapse.mp4");
+  } else if (description.includes("snow")) {
+    backgroundVideo.setAttribute("src", "images/Snow falling by the trees.mp4");
+  } else if (description.includes("clear")) {
+    backgroundVideo.setAttribute("src", "images/Sun shining on palm trees.mp4");
+  } else if (description.includes("rain")) {
+    backgroundVideo.setAttribute("src", "images/Garage door closing.mp4");
+  }
+}
+form.addEventListener("submit", checking);
