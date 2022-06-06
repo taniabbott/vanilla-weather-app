@@ -27,15 +27,18 @@ let currentClock = document.querySelector("#time");
 currentClock.innerHTML = `${hours}:${minutes}`;
 
 //Form submission
-let searchValue = document.querySelector("#city");
-function handleSubmit(event) {
-  event.preventDefault();
-  let city = document.querySelector("#city").value;
+function search(city) {
   let units = "metric";
   let apiKey = "e52c8c1aa4aa55ffa5e0f4d0066c2fed";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showTemperature);
-  searchValue.setAttribute("placeholder", `${city}`);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInput = document.querySelector("#city");
+  search(cityInput.value);
+  cityInput.value.setAttribute("placeholder", `${cityInput}`);
   document.getElementById("search").reset();
 }
 
@@ -65,6 +68,7 @@ function showTemperature(response) {
   let responseData = response.data.name;
   currentLocationName.setAttribute("placeholder", `${responseData}`);
   document.getElementById("search").reset();
+
   //Background change
   let backgroundVideo = document.getElementById("video");
   let description = response.data.weather[0];
@@ -73,7 +77,7 @@ function showTemperature(response) {
   } else if (description["description"].includes("snow")) {
     backgroundVideo.setAttribute("src", "images/Snow falling by the trees.mp4");
   } else if (description["description"].includes("clear")) {
-    backgroundVideo.setAttribute("src", "images/Sun shining on palm trees.mp4");
+    backgroundVideo.setAttribute("src", "images/Sun over bay.mp4");
   } else if (description["description"].includes("drizzle")) {
     backgroundVideo.setAttribute(
       "src",
@@ -89,6 +93,8 @@ function showTemperature(response) {
       "src",
       "images/Misty mountains in Salta, Argentina.mp4"
     );
+  } else if (description["description"].includes("storm")) {
+    backgroundVideo.setAttribute("src", "images/Lightning Bolt at Night.mp4");
   }
 }
 //find current
@@ -107,6 +113,8 @@ function getCurrentPosition(event) {
 
 let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getCurrentPosition);
+
+search("Barcelona");
 
 //Forecast
 // iconElement.setAttribute(
