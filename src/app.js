@@ -47,7 +47,9 @@ form.addEventListener("submit", handleSubmit);
 
 //Show current temp
 function showTemperature(response) {
-  let temperature = Math.round(response.data.main.temp);
+  celsiusTemp = response.data.main.temp;
+
+  let temperature = Math.round(celsiusTemp);
   let temperatureElement = document.querySelector("#today-temp");
   let iconElement = document.querySelector(".icon");
   temperatureElement.innerHTML = `${temperature}˚C`;
@@ -115,6 +117,18 @@ let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getCurrentPosition);
 
 search("Barcelona");
+
+function displayFahrehnheitTemp(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#today-temp");
+  let fahrenheitTemperature = (celsiusTemp * 9) / 5 + 32;
+  tempElement.innerHTML = `${Math.round(fahrenheitTemperature)}˚F`;
+}
+
+let fahrenheitLink = document.querySelector("#temp-button");
+fahrenheitLink.addEventListener("click", displayFahrehnheitTemp);
+
+let celsiusTemp = null;
 
 //Forecast
 // iconElement.setAttribute(
