@@ -48,6 +48,8 @@ form.addEventListener("submit", handleSubmit);
 //Show current temp
 function showTemperature(response) {
   celsiusTemp = response.data.main.temp;
+  celsiusHigh = response.data.main.temp_max;
+  celsiusLow = response.data.main.temp_min;
 
   let temperature = Math.round(celsiusTemp);
   let temperatureElement = document.querySelector("#today-temp");
@@ -65,6 +67,14 @@ function showTemperature(response) {
   let windy = Math.round(response.data.wind.speed);
   let windSpeed = document.querySelector(".wind");
   windSpeed.innerHTML = `Wind: ${windy}km/h`;
+
+  let dailyH = Math.round(celsiusHigh);
+  let dailyHigh = document.querySelector("#high");
+  dailyHigh.innerHTML = `${dailyH}˚C /`;
+
+  let dailyL = Math.round(celsiusLow);
+  let dailyLow = document.querySelector("#low");
+  dailyLow.innerHTML = `${dailyL}˚C`;
 
   let currentLocationName = document.querySelector("#city");
   let responseData = response.data.name;
@@ -118,17 +128,33 @@ currentLocationButton.addEventListener("click", getCurrentPosition);
 
 search("Barcelona");
 
-function displayFahrehnheitTemp(event) {
+function changeTemp(event) {
   event.preventDefault();
   let tempElement = document.querySelector("#today-temp");
+  let highElement = document.querySelector("#high");
+  let lowElement = document.querySelector("#low");
   let fahrenheitTemperature = (celsiusTemp * 9) / 5 + 32;
-  tempElement.innerHTML = `${Math.round(fahrenheitTemperature)}˚F`;
+  let fahrenheitHigh = (celsiusHigh * 9) / 5 + 32;
+  let fahrenheitLow = (celsiusLow * 9) / 5 + 32;
+  if (tempElement.innerHTML.includes("C")) {
+    tempElement.innerHTML = `${Math.round(fahrenheitTemperature)}˚F`;
+    highElement.innerHTML = `${Math.round(fahrenheitHigh)}˚F /`;
+    lowElement.innerHTML = `${Math.round(fahrenheitLow)}˚F`;
+    tempChange.innerHTML = "˚C";
+  } else if (tempElement.innerHTML.includes("F")) {
+    tempElement.innerHTML = `${Math.round(celsiusTemp)}˚C`;
+    highElement.innerHTML = `${Math.round(celsiusHigh)}˚C /`;
+    lowElement.innerHTML = `${Math.round(celsiusLow)}˚C`;
+    tempChange.innerHTML = "˚F";
+  }
 }
 
-let fahrenheitLink = document.querySelector("#temp-button");
-fahrenheitLink.addEventListener("click", displayFahrehnheitTemp);
+let tempChange = document.querySelector("#temp-button");
+tempChange.addEventListener("click", changeTemp);
 
 let celsiusTemp = null;
+let celsiusHigh = null;
+let celsiusLow = null;
 
 //Forecast
 // iconElement.setAttribute(
