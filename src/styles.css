@@ -37,6 +37,7 @@ wrapper {
   left: 10px;
   margin: auto;
   font-family: Helvetica;
+  color: whitesmoke;
 }
 form {
   box-sizing: border-box;
