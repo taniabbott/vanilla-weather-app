@@ -70,11 +70,11 @@ function showTemperature(response) {
 
   let dailyH = Math.round(celsiusHigh);
   let dailyHigh = document.querySelector("#high");
-  dailyHigh.innerHTML = `${dailyH}˚C /`;
+  dailyHigh.innerHTML = `${dailyH}˚C / `;
 
   let dailyL = Math.round(celsiusLow);
   let dailyLow = document.querySelector("#low");
-  dailyLow.innerHTML = `${dailyL}˚C`;
+  dailyLow.innerHTML = ` ${dailyL}˚C`;
 
   let currentLocationName = document.querySelector("#city");
   let responseData = response.data.name;
@@ -156,6 +156,11 @@ let celsiusTemp = null;
 let celsiusHigh = null;
 let celsiusLow = null;
 
+function displayForecast() {
+  let forecastElement = document.querySelector(".forecast");
+  forecastElement.innerHTML = "Forecast";
+}
+displayForecast();
 //Forecast
 // iconElement.setAttribute(
 // "src",
