@@ -117,6 +117,7 @@ function currentPosition(position) {
   let apiKey = "e52c8c1aa4aa55ffa5e0f4d0066c2fed";
   let findLocation = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
   axios.get(findLocation).then(showTemperature);
+  axios.get(findLocation).then(displayForecast);
 }
 function getCurrentPosition(event) {
   event.preventDefault;
@@ -156,10 +157,26 @@ let celsiusTemp = null;
 let celsiusHigh = null;
 let celsiusLow = null;
 
-function displayForecast() {
+function displayForecast(response) {
   let forecastElement = document.querySelector(".forecast");
   forecastElement.innerHTML = "Forecast";
+  let forecastHTML = `<div class="forecast row">`;
+  let days = ["Thursday", "Friday", "Saturday"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `         
+  </br>
+  <div class="tomorrow col"> 
+  <i class="icon fa-solid fa-cloud-sun"></i> 
+  </br>
+  <span id="Day-1">${day} </span>
+  </br><strong>24˚C </strong> / 17˚C</div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
+
 displayForecast();
 //Forecast
 // iconElement.setAttribute(
