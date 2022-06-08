@@ -104,11 +104,11 @@ function showTemperature(response) {
 
   let dailyH = Math.round(celsiusHigh);
   let dailyHigh = document.querySelector("#high");
-  dailyHigh.innerHTML = `${dailyH}˚C / `;
+  dailyHigh.innerHTML = `${dailyH}˚ / `;
 
   let dailyL = Math.round(celsiusLow);
   let dailyLow = document.querySelector("#low");
-  dailyLow.innerHTML = ` ${dailyL}˚C`;
+  dailyLow.innerHTML = ` ${dailyL}˚`;
 
   let currentLocationName = document.querySelector("#city");
   let responseData = response.data.name;
@@ -164,9 +164,9 @@ function displayForecast(response) {
                  />
   </br>
   <span id="Day-1">${formatDay(forecastDay.dt)} </span>
-  </br><strong class="forecastMax">${Math.round(
+  </br><strong class="forecast-max">${Math.round(
     forecastDay.temp.max
-  )}˚ /</strong> <span class="forecastMin"> ${Math.round(
+  )}˚ /</strong> <span class="forecast-min"> ${Math.round(
           forecastDay.temp.min
         )}˚</span>
         </div>`;
@@ -180,32 +180,48 @@ function changeTemp(event) {
   let tempElement = document.querySelector("#today-temp");
   let highElement = document.querySelector("#high");
   let lowElement = document.querySelector("#low");
+  let forecastMinTempElement = document.querySelectorAll(".forecast-min");
+  let forecastMaxTempElement = document.querySelectorAll(".forecast-max");
+  let forecastMinTemp = forecastMinTempElement.innerHTML;
+  let forecastMaxTemp = forecastMaxTempElement.innerHTML;
   let fahrenheitTemperature = (celsiusTemp * 9) / 5 + 32;
   let fahrenheitHigh = (celsiusHigh * 9) / 5 + 32;
   let fahrenheitLow = (celsiusLow * 9) / 5 + 32;
   if (tempElement.innerHTML.includes("C")) {
     tempElement.innerHTML = `${Math.round(fahrenheitTemperature)}˚F`;
-    highElement.innerHTML = `${Math.round(fahrenheitHigh)}˚F /`;
-    lowElement.innerHTML = ` ${Math.round(fahrenheitLow)}˚F`;
+    highElement.innerHTML = `${Math.round(fahrenheitHigh)}˚ /`;
+    lowElement.innerHTML = ` ${Math.round(fahrenheitLow)}˚`;
     tempChange.innerHTML = "˚C";
-    formCelsius.classList.remove("active");
-    formFahr.classList.add("active");
-    let apiKey = "e52c8c1aa4aa55ffa5e0f4d0066c2fed";
-    let findLocation = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-    axios.get(findLocation).then(showTemperature);
   } else if (tempElement.innerHTML.includes("F")) {
     tempElement.innerHTML = `${Math.round(celsiusTemp)}˚C`;
-    highElement.innerHTML = `${Math.round(celsiusHigh)}˚C /`;
-    lowElement.innerHTML = ` ${Math.round(celsiusLow)}˚C`;
+    highElement.innerHTML = `${Math.round(celsiusHigh)}˚ /`;
+    lowElement.innerHTML = ` ${Math.round(celsiusLow)}˚`;
     tempChange.innerHTML = "˚F";
-    formFahrenheit.classList.remove("active");
-    formCelsius.classList.add("active");
-    let apiKey = "e52c8c1aa4aa55ffa5e0f4d0066c2fed";
-    let findLocation = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
-    axios.get(findLocation).then(showWeather);
+  }
+  forecastMinTemp.forEach(convertMin);
+  function convertMin(item) {
+    let currentTemp = item.innerHTML;
+    if (tempElement.innerHTML.includes("C")) {
+      let forecastFahMinTemp = (currentTemp * 9) / 5 + 32;
+      item.innerHTML = Math.round(forecastFahMinTemp);
+    } else {
+      let returnCelMinTemp = ((currentTemp - 32) * 5) / 9;
+      item.innerHTML = Math.round(returnCelMinTemp);
+    }
+  }
+
+  forecastMaxTemp.forEach(convertMax);
+  function convertMax(item) {
+    let currentTemp = item.innerHTML;
+    if (tempElement.innerHTML.includes("C")) {
+      let forecastFahMaxTemp = (currentTemp * 9) / 5 + 32;
+      item.innerHTML = Math.round(forecastFahMaxTemp);
+    } else {
+      let returnCelMaxTemp = ((currentTemp - 32) * 5) / 9;
+      item.innerHTML = Math.round(returnCelMaxTemp);
+    }
   }
 }
-
 let tempChange = document.querySelector("#temp-button");
 tempChange.addEventListener("click", changeTemp);
 
