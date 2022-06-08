@@ -26,6 +26,12 @@ currentDate.innerHTML = `${currentDay}`;
 let currentClock = document.querySelector("#time");
 currentClock.innerHTML = `${hours}:${minutes}`;
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+
+  return days[day];
+}
 //Form submission
 function search(city) {
   let units = "metric";
@@ -56,7 +62,7 @@ function currentPosition(position) {
 function getForecast(coordinates) {
   console.log(coordinates);
   let apiKey = "e52c8c1aa4aa55ffa5e0f4d0066c2fed";
-  let findLocation = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let findLocation = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(findLocation).then(displayForecast);
 }
 function getCurrentPosition(event) {
@@ -170,14 +176,16 @@ function displayForecast(response) {
         `</br>
   <div class="tomorrow col"> 
   <img 
-  src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}2x.png"
-  alt=""
-  width="42"
-  /> 
+                 src="http://openweathermap.org/img/wn/${
+                   forecastDay.weather[0].icon
+                 }@2x.png" 
+                 alt="" 
+                 width="42"
+                 />
   </br>
-  <span id="Day-1">${forecastDay.dt} </span>
+  <span id="Day-1">${formatDay(forecastDay.dt)} </span>
   </br><strong>${Math.round(forecastDay.temp.max)} /</strong> ${Math.round(
-          forecastDay.temp.max
+          forecastDay.temp.min
         )}
         </div>`;
     }
