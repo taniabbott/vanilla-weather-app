@@ -26,6 +26,9 @@ currentDate.innerHTML = `${currentDay}`;
 let currentClock = document.querySelector("#time");
 currentClock.innerHTML = `${hours}:${minutes}`;
 
+let coord = null;
+let units = "metric";
+
 //celsius global var
 //celsiusTemp = response.data.main.temp;
 //fahrenheit.classList.remove("active");
@@ -185,11 +188,21 @@ function changeTemp(event) {
     highElement.innerHTML = `${Math.round(fahrenheitHigh)}˚F /`;
     lowElement.innerHTML = ` ${Math.round(fahrenheitLow)}˚F`;
     tempChange.innerHTML = "˚C";
+    formCelsius.classList.remove("active");
+    formFahr.classList.add("active");
+    let apiKey = "e52c8c1aa4aa55ffa5e0f4d0066c2fed";
+    let findLocation = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+    axios.get(findLocation).then(showTemperature);
   } else if (tempElement.innerHTML.includes("F")) {
     tempElement.innerHTML = `${Math.round(celsiusTemp)}˚C`;
     highElement.innerHTML = `${Math.round(celsiusHigh)}˚C /`;
     lowElement.innerHTML = ` ${Math.round(celsiusLow)}˚C`;
     tempChange.innerHTML = "˚F";
+    formFahrenheit.classList.remove("active");
+    formCelsius.classList.add("active");
+    let apiKey = "e52c8c1aa4aa55ffa5e0f4d0066c2fed";
+    let findLocation = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
+    axios.get(findLocation).then(showWeather);
   }
 }
 
