@@ -45,6 +45,25 @@ function handleSubmit(event) {
 let form = document.querySelector("#search");
 form.addEventListener("submit", handleSubmit);
 
+//find current
+function currentPosition(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "e52c8c1aa4aa55ffa5e0f4d0066c2fed";
+  let findLocation = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  axios.get(findLocation).then(showTemperature);
+}
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "e52c8c1aa4aa55ffa5e0f4d0066c2fed";
+  let findLocation = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(findLocation).then(displayForecast);
+}
+function getCurrentPosition(event) {
+  event.preventDefault;
+  navigator.geolocation.getCurrentPosition(currentPosition);
+}
+
 //Show current temp
 function showTemperature(response) {
   celsiusTemp = response.data.main.temp;
@@ -108,26 +127,8 @@ function showTemperature(response) {
   } else if (description["description"].includes("storm")) {
     backgroundVideo.setAttribute("src", "images/Lightning Bolt at Night.mp4");
   }
+  getForecast(response.data.coord);
 }
-//find current
-function currentPosition(position) {
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
-  let units = "metric";
-  let apiKey = "e52c8c1aa4aa55ffa5e0f4d0066c2fed";
-  let findLocation = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-  axios.get(findLocation).then(showTemperature);
-  axios.get(findLocation).then(displayForecast);
-}
-function getCurrentPosition(event) {
-  event.preventDefault;
-  navigator.geolocation.getCurrentPosition(currentPosition);
-}
-
-let currentLocationButton = document.querySelector("#current-location");
-currentLocationButton.addEventListener("click", getCurrentPosition);
-
-search("Barcelona");
 
 function changeTemp(event) {
   event.preventDefault();
@@ -140,12 +141,12 @@ function changeTemp(event) {
   if (tempElement.innerHTML.includes("C")) {
     tempElement.innerHTML = `${Math.round(fahrenheitTemperature)}˚F`;
     highElement.innerHTML = `${Math.round(fahrenheitHigh)}˚F /`;
-    lowElement.innerHTML = `${Math.round(fahrenheitLow)}˚F`;
+    lowElement.innerHTML = ` ${Math.round(fahrenheitLow)}˚F`;
     tempChange.innerHTML = "˚C";
   } else if (tempElement.innerHTML.includes("F")) {
     tempElement.innerHTML = `${Math.round(celsiusTemp)}˚C`;
     highElement.innerHTML = `${Math.round(celsiusHigh)}˚C /`;
-    lowElement.innerHTML = `${Math.round(celsiusLow)}˚C`;
+    lowElement.innerHTML = ` ${Math.round(celsiusLow)}˚C`;
     tempChange.innerHTML = "˚F";
   }
 }
@@ -158,26 +159,37 @@ let celsiusHigh = null;
 let celsiusLow = null;
 
 function displayForecast(response) {
-  let forecastElement = document.querySelector(".forecast");
-  forecastElement.innerHTML = "Forecast";
-  let forecastHTML = `<div class="forecast row">`;
-  let days = ["Thursday", "Friday", "Saturday"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `         
-  </br>
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `</br>
   <div class="tomorrow col"> 
-  <i class="icon fa-solid fa-cloud-sun"></i> 
+  <img 
+  src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}2x.png"
+  alt=""
+  width="42"
+  /> 
   </br>
-  <span id="Day-1">${day} </span>
-  </br><strong>24˚C </strong> / 17˚C</div>`;
+  <span id="Day-1">${forecastDay.dt} </span>
+  </br><strong>${Math.round(forecastDay.temp.max)} /</strong> ${Math.round(
+          forecastDay.temp.max
+        )}
+        </div>`;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
-displayForecast();
+let currentLocationButton = document.querySelector("#current-location");
+currentLocationButton.addEventListener("click", getCurrentPosition);
+
+search("Barcelona");
 //Forecast
 // iconElement.setAttribute(
 // "src",

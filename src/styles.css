@@ -107,7 +107,7 @@ button {
   height: 34px;
   width: 30px;
 }
-.forecast {
+#forecast {
   padding: 20px 0px 0px 0px;
 }
 #highLow {
