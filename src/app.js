@@ -26,6 +26,13 @@ currentDate.innerHTML = `${currentDay}`;
 let currentClock = document.querySelector("#time");
 currentClock.innerHTML = `${hours}:${minutes}`;
 
+//celsius global var
+//celsiusTemp = response.data.main.temp;
+//fahrenheit.classList.remove("active");
+//fahrenheit.classList.add("inactive");
+//celsius.classList.add("active");
+//celsius.classList.remove("inactive");
+
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
@@ -78,7 +85,6 @@ function showTemperature(response) {
 
   let temperature = Math.round(celsiusTemp);
   let temperatureElement = document.querySelector("#today-temp");
-  let iconElement = document.querySelector(".icon");
   temperatureElement.innerHTML = `${temperature}˚C`;
 
   let humid = Math.round(response.data.main.humidity);
@@ -136,6 +142,36 @@ function showTemperature(response) {
   getForecast(response.data.coord);
 }
 
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index > 0 && index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `</br>
+  <div class="tomorrow col"> 
+  <img 
+                 src="http://openweathermap.org/img/wn/${
+                   forecastDay.weather[0].icon
+                 }@2x.png" 
+                 alt="" 
+                 width="42"
+                 />
+  </br>
+  <span id="Day-1">${formatDay(forecastDay.dt)} </span>
+  </br><strong class="forecastMax">${Math.round(
+    forecastDay.temp.max
+  )}˚ /</strong> <span class="forecastMin"> ${Math.round(
+          forecastDay.temp.min
+        )}˚</span>
+        </div>`;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
 function changeTemp(event) {
   event.preventDefault();
   let tempElement = document.querySelector("#today-temp");
@@ -164,43 +200,7 @@ let celsiusTemp = null;
 let celsiusHigh = null;
 let celsiusLow = null;
 
-function displayForecast(response) {
-  let forecast = response.data.daily;
-  let forecastElement = document.querySelector("#forecast");
-
-  let forecastHTML = `<div class="row">`;
-  forecast.forEach(function (forecastDay, index) {
-    if (index < 5) {
-      forecastHTML =
-        forecastHTML +
-        `</br>
-  <div class="tomorrow col"> 
-  <img 
-                 src="http://openweathermap.org/img/wn/${
-                   forecastDay.weather[0].icon
-                 }@2x.png" 
-                 alt="" 
-                 width="42"
-                 />
-  </br>
-  <span id="Day-1">${formatDay(forecastDay.dt)} </span>
-  </br><strong>${Math.round(forecastDay.temp.max)} /</strong> ${Math.round(
-          forecastDay.temp.min
-        )}
-        </div>`;
-    }
-  });
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-}
-
 let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getCurrentPosition);
 
 search("Barcelona");
-//Forecast
-// iconElement.setAttribute(
-// "src",
-//`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-//);
-//iconElement.setAttribute("alt", response.data.weather[0].description);
