@@ -166,9 +166,9 @@ function displayForecast(response) {
   <span id="Day-1">${formatDay(forecastDay.dt)} </span>
   </br><strong class="forecast-max">${Math.round(
     forecastDay.temp.max
-  )}˚ /</strong> <span class="forecast-min"> ${Math.round(
+  )}</strong>˚ / <span class="forecast-min"> ${Math.round(
           forecastDay.temp.min
-        )}˚</span>
+        )}</span>˚
         </div>`;
     }
   });
@@ -235,4 +235,4 @@ let celsiusLow = null;
 let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getCurrentPosition);
 
-search("Barcelona");
+search("Brisbane");
