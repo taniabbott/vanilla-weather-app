@@ -29,13 +29,6 @@ currentClock.innerHTML = `${hours}:${minutes}`;
 let coord = null;
 let units = "metric";
 
-//celsius global var
-//celsiusTemp = response.data.main.temp;
-//fahrenheit.classList.remove("active");
-//fahrenheit.classList.add("inactive");
-//celsius.classList.add("active");
-//celsius.classList.remove("inactive");
-
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
@@ -182,8 +175,6 @@ function changeTemp(event) {
   let lowElement = document.querySelector("#low");
   let forecastMinTempElement = document.querySelectorAll(".forecast-min");
   let forecastMaxTempElement = document.querySelectorAll(".forecast-max");
-  let forecastMinTemp = forecastMinTempElement.innerHTML;
-  let forecastMaxTemp = forecastMaxTempElement.innerHTML;
   let fahrenheitTemperature = (celsiusTemp * 9) / 5 + 32;
   let fahrenheitHigh = (celsiusHigh * 9) / 5 + 32;
   let fahrenheitLow = (celsiusLow * 9) / 5 + 32;
@@ -235,4 +226,4 @@ let celsiusLow = null;
 let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getCurrentPosition);
 
-search("Brisbane");
+search("Barcelona");
