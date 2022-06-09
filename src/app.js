@@ -192,36 +192,39 @@ function changeTemp(event) {
     highElement.innerHTML = `${Math.round(fahrenheitHigh)}˚ /`;
     lowElement.innerHTML = ` ${Math.round(fahrenheitLow)}˚`;
     tempChange.innerHTML = "˚C";
+    forecastMinTemp.forEach(convertMin);
+    forecastMaxTemp.forEach(convertMax);
   } else if (tempElement.innerHTML.includes("F")) {
     tempElement.innerHTML = `${Math.round(celsiusTemp)}˚C`;
     highElement.innerHTML = `${Math.round(celsiusHigh)}˚ /`;
     lowElement.innerHTML = ` ${Math.round(celsiusLow)}˚`;
     tempChange.innerHTML = "˚F";
-  }
-  forecastMinTemp.forEach(convertMin);
-  function convertMin(item) {
-    let currentTemp = item.innerHTML;
-    if (tempElement.innerHTML.includes("C")) {
-      let forecastFahMinTemp = (currentTemp * 9) / 5 + 32;
-      item.innerHTML = Math.round(forecastFahMinTemp);
-    } else {
-      let returnCelMinTemp = ((currentTemp - 32) * 5) / 9;
-      item.innerHTML = Math.round(returnCelMinTemp);
-    }
-  }
-
-  forecastMaxTemp.forEach(convertMax);
-  function convertMax(item) {
-    let currentTemp = item.innerHTML;
-    if (tempElement.innerHTML.includes("C")) {
-      let forecastFahMaxTemp = (currentTemp * 9) / 5 + 32;
-      item.innerHTML = Math.round(forecastFahMaxTemp);
-    } else {
-      let returnCelMaxTemp = ((currentTemp - 32) * 5) / 9;
-      item.innerHTML = Math.round(returnCelMaxTemp);
-    }
+    forecastMinTemp.forEach(convertMin);
+    forecastMaxTemp.forEach(convertMax);
   }
 }
+function convertMin(item) {
+  let currentTemp = item.innerHTML;
+  if (tempElement.innerHTML.includes("C")) {
+    let forecastFahMinTemp = (currentTemp * 9) / 5 + 32;
+    item.innerHTML = Math.round(forecastFahMinTemp);
+  } else {
+    let returnCelMinTemp = ((currentTemp - 32) * 5) / 9;
+    item.innerHTML = Math.round(returnCelMinTemp);
+  }
+}
+
+function convertMax(item) {
+  let currentTemp = item.innerHTML;
+  if (tempElement.innerHTML.includes("C")) {
+    let forecastFahMaxTemp = (currentTemp * 9) / 5 + 32;
+    item.innerHTML = Math.round(forecastFahMaxTemp);
+  } else {
+    let returnCelMaxTemp = ((currentTemp - 32) * 5) / 9;
+    item.innerHTML = Math.round(returnCelMaxTemp);
+  }
+}
+
 let tempChange = document.querySelector("#temp-button");
 tempChange.addEventListener("click", changeTemp);
 
