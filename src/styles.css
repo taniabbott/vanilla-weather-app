@@ -15,14 +15,13 @@ wrapper {
 }
 .overlay {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 20px;
+  right: 20px;
   border: 1px grey;
   border-radius: 4px;
   left: 50%;
   transform: translate(-50%, 0);
   max-width: 700px;
-
   margin: 60px auto;
   padding: 60px 60px;
   font-size: 20px;
@@ -42,15 +41,14 @@ wrapper {
 form {
   box-sizing: border-box;
   font-size: 45px;
-  border: 0px;
   padding-left: 0px;
 }
 input[type="text"] {
   background-color: rgba(255, 255, 255, 0);
-  border: 0.1px;
+  border: 0.01px solid grey;
+  border-radius: 4px;
 }
 input[type="text"]:focus {
-  border: 0.1px;
   outline: none;
 }
 button {
